@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insite IDS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;800&display=swap');
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #ffffff;
+        color: #000000;
+        margin: 0;
+        overflow-x: hidden;
+        transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.8s ease;
+      }
+
+      .mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
+      .energy-gradient {
+        background: linear-gradient(90deg, #fff7ad 0%, #ffa9f9 100%);
+        transition: background 0.8s ease, filter 0.8s ease;
+      }
+
+      /* --- COMPLEX ACTIVATION ANIMATION --- */
+      
+      .circuit-svg {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      .circuit-path {
+        fill: none;
+        stroke: #e2e8f0;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        opacity: 0.15;
+      }
+
+      .energy-pulse {
+        fill: none;
+        stroke: url(#pulseGradient);
+        stroke-width: 3.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 120, 1000; /* Increased segment length */
+        stroke-dashoffset: 1000;
+        filter: blur(0.5px) drop-shadow(0 0 12px rgba(255,169,249,0.9));
+        mask: url(#pulseMask); /* Apply mask for fading ends */
+      }
+
+      @keyframes pulse-flow {
+        0% { stroke-dashoffset: 1120; opacity: 0; }
+        10% { opacity: 1; }
+        90% { opacity: 1; }
+        100% { stroke-dashoffset: 0; opacity: 0; }
+      }
+
+      .animate-pulse-flow {
+        animation: pulse-flow 3.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      }
+
+      /* Wake Transition Overlay */
+      .wake-overlay {
+        position: fixed;
+        inset: 0;
+        background: #fff;
+        z-index: 2000;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      @keyframes wake-flash {
+        0% { opacity: 0; transform: scale(1.1); }
+        30% { opacity: 0.9; transform: scale(1); }
+        100% { opacity: 0; transform: scale(1); }
+      }
+
+      .animate-wake-flash { animation: wake-flash 1.2s ease-out forwards; }
+
+      /* System Wake Sweep */
+      .wake-wave {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(90deg, transparent, rgba(255,247,173,0.3), rgba(255,169,249,0.3), transparent);
+        z-index: 1100;
+        pointer-events: none;
+        transform: translateX(-100%);
+      }
+
+      @keyframes sweep-anim {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+
+      .trigger-sweep { animation: sweep-anim 2.2s cubic-bezier(0.6, 0, 0.4, 1) forwards; }
+
+      /* --- STANDBY UI --- */
+
+      .vigilance-off {
+        filter: saturate(0) contrast(1.05) brightness(1.02);
+        background-color: #f1f5f9;
+      }
+
+      .vigilance-off .energy-gradient {
+        background: #cbd5e1 !important;
+      }
+
+      /* Standby Button - No pulse as requested */
+      .standby-btn-static {
+        border-color: #000 !important;
+        background: #fff !important;
+        z-index: 100 !important;
+        box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      }
+
+      /* Custom scrollbar */
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "recharts": "https://esm.sh/recharts@^3.6.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+<h1>IDS Frontend</h1>
+  <p id="backend-status">Checking backend...</p>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
