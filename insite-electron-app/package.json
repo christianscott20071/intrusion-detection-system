@@ -5,11 +5,24 @@
   "type": "module",
   "main": "main.cjs",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "start": "electron ."
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "start": "electron .",
+  "dist": "vite build && electron-builder"
+},
+  "build": {
+  "appId": "com.yourname.insiteids",
+  "mac": {
+    "target": "dmg"
   },
+  "files": [
+    "dist/**/*",
+    "main.cjs",
+    "backend/**/*",
+    "package.json"
+  ]
+},
   "dependencies": {
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",

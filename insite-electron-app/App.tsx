@@ -544,7 +544,25 @@ useEffect(() => {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-4 lg:gap-8 shrink-0">
-          <button onClick={() => { if (!isVigilanceActive) { setIsTransitioning(true); setTimeout(() => setIsVigilanceActive(true), 500); setTimeout(() => setIsTransitioning(false), 3500); } else { setIsVigilanceActive(false); } }} className={`flex items-center gap-3 lg:gap-5 px-5 lg:px-8 py-3 lg:py-4 rounded-full border-2 transition-all duration-500 backdrop-blur-md group active:scale-95 ${isVigilanceActive ? 'bg-black/5 border-black/10 hover:bg-black/10 shadow-inner' : 'standby-btn-static scale-105 lg:scale-110'}`}>
+          <button onClick={async () => {
+  console.log("BUTTON CLICKED");
+
+  if (!isVigilanceActive) {
+    console.log("Starting backend...");
+    const result = await window.api.toggleBackend("start");
+    console.log("RESULT:", result);
+
+    setIsTransitioning(true);
+    setTimeout(() => setIsVigilanceActive(true), 500);
+    setTimeout(() => setIsTransitioning(false), 3500);
+  } else {
+    console.log("Stopping backend...");
+    const result = await window.api.toggleBackend("stop");
+    console.log("RESULT:", result);
+
+    setIsVigilanceActive(false);
+  }
+}} className={`flex items-center gap-3 lg:gap-5 px-5 lg:px-8 py-3 lg:py-4 rounded-full border-2 transition-all duration-500 backdrop-blur-md group active:scale-95 ${isVigilanceActive ? 'bg-black/5 border-black/10 hover:bg-black/10 shadow-inner' : 'standby-btn-static scale-105 lg:scale-110'}`}>
             <div className={`w-2.5 lg:w-3.5 h-2.5 lg:h-3.5 rounded-full transition-all duration-500 ${!isVigilanceActive ? 'bg-amber-600 shadow-[0_0_10px_#d97706]' : metrics.latency > 45 ? 'bg-amber-400 shadow-[0_0_15px_rgba(251,191,36,0.6)]' : 'bg-emerald-400 shadow-[0_0_15px_rgba(52,211,153,0.6)] animate-pulse'}`}></div>
             <span className="text-[11px] lg:text-[13px] font-black uppercase tracking-[0.15em] lg:tracking-[0.2em] transition-colors text-black">{isVigilanceActive ? 'Online' : 'Enable'}</span>
             {isVigilanceActive ? <Zap size={12} className="text-black ml-1 animate-bounce" /> : <PowerOff size={14} className="text-black ml-1" />}
