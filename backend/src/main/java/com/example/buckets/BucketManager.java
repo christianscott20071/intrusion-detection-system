@@ -29,7 +29,7 @@ public class BucketManager{
             lastRotationTime = System.currentTimeMillis();
         }
     }
-    public synchronized void  addEvent(Event e){
+    public synchronized void addEvent(Event e){
         rotateIfNeeded();
         bucketArray.get(currentIndex).addEvent(e);
     }
@@ -54,5 +54,13 @@ public class BucketManager{
             all.addAll(bucket.getEvents());
         }
     return all;
+    }
+    public synchronized ArrayList<Event> getAndClearEvents(){
+        ArrayList<Event> all = new ArrayList<>();
+        for(Bucket bucket : bucketArray){
+            all.addAll(bucket.getEvents());
+            bucket.clear();
+        }
+        return all;
     }
 }

@@ -12,6 +12,7 @@ public enum AttackType {
     COMMON_ATTACK_PORT,
     LONG_PACKET,
     SHORT_PACKET,
-    MALFORMED_PACKET
+    MALFORMED_PACKET,
+    BRUTE_FORCE
 }
 

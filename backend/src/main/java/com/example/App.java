@@ -17,6 +17,9 @@ import com.example.detection.DetectionEngine;
 import com.example.parser.PacketParser;
 import com.example.metrics.ContinuityService;
 import com.example.detection.ThreatAggregator;
+import com.example.settings.SettingsManager;
+import jakarta.annotation.PostConstruct;
+
 @SpringBootApplication
 @EnableScheduling
 public class App {
@@ -52,5 +55,6 @@ public class App {
         snifferThread.start();
         parserThread.start();
         detectorThread.start();
+        SettingsManager.load();
     }
 }

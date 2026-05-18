@@ -49,8 +49,8 @@ async function startBackend() {
   }
 
   const jarPath = app.isPackaged
-    ? path.join(process.resourcesPath, "backend", "csivproj-1.0-SNAPSHOT.jar")
-    : "/Users/christianscott/Documents/Development/CSIV Project/csivproj/insite-electron-app/backend/csivproj-1.0-SNAPSHOT.jar";
+    ? path.join(process.resourcesPath, "backend", "csivproj-1.1-SNAPSHOT.jar")
+    : "/Users/christianscott/Documents/Development/CSIV Project/csivproj/backend/target/csivproj-1.1-SNAPSHOT.jar";
 
   console.log("Starting backend with JAR:", jarPath);
 

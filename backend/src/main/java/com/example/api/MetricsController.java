@@ -32,14 +32,14 @@ public class MetricsController {
     @GetMapping("/metrics/continuity")
     public Map<String, Object> continuity() {
 
-        long start = System.nanoTime(); // 🔹 START timing
+        long start = System.nanoTime(); //start
 
         double continuity = continuityService.getContinuity();
 
-        long end = System.nanoTime();   // 🔹 END timing
+        long end = System.nanoTime();   //end
         long delayMs = (end - start) / 1_000_000;
         //System.out.println("Recordedd response delay: " + delayMs + " ms");
-        responseDelayService.record(delayMs); // 🔹 RECORD delay
+        responseDelayService.record(delayMs); // record
 
         return Map.of(
             "continuity", continuity

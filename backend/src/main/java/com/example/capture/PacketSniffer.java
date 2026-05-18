@@ -37,7 +37,7 @@ for (int i = 0; i < devices.size(); i++) {
     System.out.println(i + ": " + devices.get(i).getName() + " (" + devices.get(i).getDescription() + ")");
 }
     //Now we want to open this list and open our capturing
-    PcapNetworkInterface nif = devices.get(2);
+    PcapNetworkInterface nif = devices.get(10);
     System.out.println("Using network interface: "+ nif.getName() + "(" + nif.getDescription()+  ")");
     PcapHandle handle = nif.openLive(65536, PromiscuousMode.PROMISCUOUS,100);
     try {

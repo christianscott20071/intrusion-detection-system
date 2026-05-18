@@ -1,0 +1,22 @@
+{
+  "detection" : {
+    "signatureEnabled" : true,
+    "anomalyEnabled" : true,
+    "heuristicEnabled" : false,
+    "sensitivity" : 75
+  },
+  "alerts" : {
+    "severity" : { },
+    "channels" : { }
+  },
+  "network" : {
+    "interfaces" : { },
+    "trustedSubnets" : ""
+  },
+  "ai" : {
+    "verbosity" : "Detailed"
+  },
+  "system" : {
+    "retention" : 30
+  }
+}

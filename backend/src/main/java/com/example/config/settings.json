@@ -1,0 +1,16 @@
+{
+  "network": {
+    "interfaces": {"en0": "active"},
+    "trustedSubnets": {"home": "192.168.1.0/24"}
+  },
+  "alerts": {
+    "severity": {"critical": "high"},
+    "channels": {"email": "enabled"}
+  },
+  "ai": {
+    "verbosity": "Detailed"
+  },
+  "system": {
+    "retention": 30
+  }
+}

@@ -14,7 +14,7 @@ public class AiController {
 
     private final GeminiService geminiService;
 
-    // Cache explanation per alert ID
+    //cache explanation per alert ID
     private final Map<String, String> alertCache = new ConcurrentHashMap<>();
     private final Map<String, String> alertSeverityCache = new ConcurrentHashMap<>();
 
@@ -39,18 +39,13 @@ public class AiController {
         String prompt = """
                 You are an assistant to an intrusion detection system.
 
-                Explain this IP behavior briefly to an adult beginner-intermediate in networking/security.
+                Explain this IP behavior briefly to an adult beginner-intermediate in networking/security. Your explanation should be in completely natural language plaintext. Explain the purpose of the attack, if there is an attack. You are determining the intent behind the observed behavior. Not every prompt is an indication of malicious intent, use context clues.
                 Keep it under 100 words.
                 Data:
                 """ + summary;
 
         return geminiService.analyze(prompt);
     }
-
-    /**
-     * Analyze alert (TEXT ONLY)
-     * Only regenerates if severity changes
-     */
     @PostMapping(
         path = "/analyzeAlert",
         consumes = MediaType.TEXT_PLAIN_VALUE,
@@ -64,7 +59,6 @@ public class AiController {
 
         /*
          Expected text format from frontend:
-
          ID: 10.95.202.244-STEALTH_SCAN
          Severity: MEDIUM
          Type: STEALTH_SCAN
@@ -77,18 +71,18 @@ public class AiController {
         String severity = extractField(alertText, "Severity:");
 
         if (id == null) {
-            // If ID not present, fallback (no caching possible)
+           //fallback
             return generateExplanation(alertText);
         }
 
         String lastSeverity = alertSeverityCache.get(id);
 
-        // If severity unchanged, return cached explanation
+        //if severity is the same
         if (lastSeverity != null && lastSeverity.equals(severity)) {
             return alertCache.get(id);
         }
 
-        // Otherwise regenerate
+        //regen
         String explanation = generateExplanation(alertText);
 
         alertCache.put(id, explanation);
@@ -102,8 +96,7 @@ public class AiController {
         String prompt = """
                 You are an assistant to an intrusion detection system.
 
-                Summarize this alert briefly for an adult beginner-intermediate in networking/security.
-                Include the number of hits.
+                Summarize this alert briefly for an adult beginner-intermediate in networking/security. Your summary should be in completely natural language plaintext. Explain the purpose of the attack, if there is an attack. You are determining the intent behind the observed behavior. Not every prompt is an indication of malicious intent, use context clues.
                 Keep it under 50 words.
 
                 Alert Data:

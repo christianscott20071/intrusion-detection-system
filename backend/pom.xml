@@ -17,7 +17,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>csivproj</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
 
     <properties>
         <java.version>17</java.version>
@@ -67,6 +67,11 @@
             <groupId>com.google.genai</groupId>
             <artifactId>google-genai</artifactId>
             <version>1.4.1</version> 
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.0</version>
         </dependency>
     </dependencies>
 
