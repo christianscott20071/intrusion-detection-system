@@ -19,6 +19,7 @@ Testing: Validated using Kali Linux attack simulations
 Architecture:
 
 /backend   → Spring Boot server, packet capture engine, detection logic
+
 /insite-electron-app  → Electron desktop application
 
 How it works:
