@@ -12,7 +12,7 @@ function isBackendAlive(port = 8080) {
       socket.end();
       resolve(true);
     });
-    socket.on("error", () => resolve(false));
+    socket.on("error", () => resolve(false)); 
   });
 }
 
