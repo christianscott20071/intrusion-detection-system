@@ -14,7 +14,7 @@ Tech Stack:
 Backend: Java, Spring Boot, pcap4j (custom packet parser)
 Frontend: Electron
 AI Integration: Google Gemini API
-Testing: Validated using Kali Linux attack simulations
+Testing: Validated using Kali Linux attack simulations (Nmap, Hydra)
 
 Architecture:
 
